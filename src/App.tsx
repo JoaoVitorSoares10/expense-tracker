@@ -16,7 +16,9 @@ const App=()=> {
   const [list, setList] = useState(Items);
   const [filteredList, setFilteredList] = useState<Item[]>([]);
   const [currentMonth, setCurrentMonth] = useState(getCurrentMonth());
-  
+  const [inCome, setInCome] = useState(0);
+  const [expense, setExpense] = useState(0);
+
   const onMonthChange =(newMonth: string)=>{
     setCurrentMonth(newMonth);
   }
@@ -24,6 +26,23 @@ const App=()=> {
   useEffect(()=>{
     setFilteredList(filterListByMonth(list, currentMonth));
   }, [list, currentMonth]);
+
+  useEffect(()=>{
+    let expenseCount = 0;
+    let inComeCount = 0;
+
+    for(let i in filteredList){
+      if(Categories[filteredList[i].category].expense) {
+        expenseCount += filteredList[i].value;
+      }else{
+        inComeCount += filteredList[i].value; 
+      }
+    }
+
+    setInCome(inComeCount);
+    setExpense(expenseCount);
+
+  }, [filteredList]);
 
   return (
     <C.Container>
@@ -34,6 +53,8 @@ const App=()=> {
         <InfoArea 
           currentMonth={currentMonth}
           onMonthChange={onMonthChange}
+          inCome={inCome}
+          expense={expense}
         />
         <TableArea list={filteredList}/>
       </C.Body>
