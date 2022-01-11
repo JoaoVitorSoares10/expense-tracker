@@ -19,4 +19,10 @@ export const Items: Item[] = [
         title: 'Braste',
         value: 1500
     },
+    {
+        date: new Date(2022, 0, 10), 
+        category: 'salary',
+        title: 'Arvorismo',
+        value: 360
+    },
 ];

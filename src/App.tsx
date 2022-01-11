@@ -11,6 +11,7 @@ import { getCurrentMonth, filterListByMonth } from './functions/dateFilter';
 
 import { TableArea } from './components/tableArea';
 import { InfoArea } from './components/infoArea';
+import { InputArea } from './components/inputArea';
 
 const App=()=> {
   const [list, setList] = useState(Items);
@@ -44,6 +45,12 @@ const App=()=> {
 
   }, [filteredList]);
 
+  const handleAddItem=(item: Item)=>{
+    let currentlist = list;
+    currentlist.push(item);
+    setList(currentlist);
+  }
+
   return (
     <C.Container>
       <C.Header>
@@ -56,6 +63,7 @@ const App=()=> {
           inCome={inCome}
           expense={expense}
         />
+        <InputArea handleAddItem={handleAddItem}/>
         <TableArea list={filteredList}/>
       </C.Body>
     </C.Container>
