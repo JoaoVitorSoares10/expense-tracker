@@ -51,10 +51,9 @@ const App=()=> {
     currentlist.push(item);
     setList(currentlist); */
     try{
-      const response = await Api.post('/add')
-      console.log(response);
+      await Api.post('/add', item)
     }catch (err){
-      console.log(err);
+      console.log(err)
     }
   }
 
