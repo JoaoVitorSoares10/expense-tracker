@@ -4,11 +4,12 @@ const cors = require('cors');
 const path = require('path');
 const mongoose = require('mongoose');
 const routes = require('./src/routes/routes');
+const db = require('./src/database/config');
 
 const port = process.env.PORT || 8080;
 const app = express();
 
-mongoose.connect('',{ useNewUrlParser: true, useUnifiedTopology: true }, (err)=>{
+mongoose.connect(db.uri, { useNewUrlParser: true, useUnifiedTopology: true }, (err)=>{
     if(err){
         console.log(err);
     }else{

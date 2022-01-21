@@ -12,6 +12,7 @@ import { getCurrentMonth, filterListByMonth } from './functions/dateFilter';
 import { TableArea } from './components/tableArea';
 import { InfoArea } from './components/infoArea';
 import { InputArea } from './components/inputArea';
+import Api from './service/api';
 
 const App=()=> {
   const [list, setList] = useState(Items);
@@ -45,10 +46,16 @@ const App=()=> {
 
   }, [filteredList]);
 
-  const handleAddItem=(item: Item)=>{
-    let currentlist = list;
+  const handleAddItem=async(item: Item)=>{
+    /* let currentlist = list;
     currentlist.push(item);
-    setList(currentlist);
+    setList(currentlist); */
+    try{
+      const response = await Api.post('/add')
+      console.log(response);
+    }catch (err){
+      console.log(err);
+    }
   }
 
   return (
